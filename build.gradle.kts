@@ -35,5 +35,6 @@ dependencies {
     }
 
     implementation("com.alibaba:fastjson:2.0.7")
+    implementation("cn.hutool:hutool-all:5.8.4")
 
 }

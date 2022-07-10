@@ -35,9 +35,3 @@ fun main() {
 
 
 
-fun getRequest(url:String,data:Parameters,referrer:String):Request{
-    return Fuel.post(url,data)
-        .header("user-agent","Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0 Safari/605.1.15")
-        .header("referrer",referrer)
-        .header("cookie",DataProvider.cookie)
-}

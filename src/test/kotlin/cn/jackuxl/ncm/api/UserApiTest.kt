@@ -1,22 +1,22 @@
 package cn.jackuxl.ncm.api
 
+import org.junit.jupiter.api.Test
+import cn.jackuxl.ncm.api.UserApi.User
 import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.result.Result
-import org.junit.jupiter.api.Test
-import cn.jackuxl.ncm.api.SongApi.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
+
 import org.junit.jupiter.api.Assertions.*
 
-internal class SongApiTest {
-    private val songApi = SongApi(Song("1960903012"))
+internal class UserApiTest {
+    private val userApi = UserApi(User("","12345678"))
+    // Todo: Fix {"code":400,"message":"登陆失败,请进行安全验证"}
     @Test
-    fun getComments() {
+    fun loginByCellphone() {
         FuelManager.instance.basePath = "https://music.163.com"
-        songApi.getComments(2).responseString { request, response, result ->
+        userApi.user.account = "13800000000"
+        userApi.loginByCellphone().responseString { request, response, result ->
             when (result) {
                 is Result.Failure -> {
                     throw result.getException()
@@ -30,12 +30,11 @@ internal class SongApiTest {
             delay(3000L)  //阻塞主线程防止过快退出
         }
     }
-
-
     @Test
-    fun getDetail() {
+    fun loginByEmail() {
         FuelManager.instance.basePath = "https://music.163.com"
-        songApi.getDetail().responseString { request, response, result ->
+        userApi.user.account = "admin@163.com"
+        userApi.loginByEmail().responseString { request, response, result ->
             when (result) {
                 is Result.Failure -> {
                     throw result.getException()
@@ -46,7 +45,7 @@ internal class SongApiTest {
             }
         }
         runBlocking {     // 这个表达式阻塞了主线程
-            delay(10000000L)  //阻塞主线程防止过快退出
+            delay(3000L)  //阻塞主线程防止过快退出
         }
     }
 }
