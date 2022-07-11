@@ -12,11 +12,12 @@ import kotlinx.serialization.json.Json
 import org.junit.jupiter.api.Assertions.*
 
 internal class SongApiTest {
-    private val songApi = SongApi(Song("1960903012"))
+    private val songApi = SongApi()
+    private val id = 1960903012L
     @Test
     fun getComments() {
         FuelManager.instance.basePath = "https://music.163.com"
-        songApi.getComments(2).responseString { request, response, result ->
+        songApi.getComments(id,2).responseString { request, response, result ->
             when (result) {
                 is Result.Failure -> {
                     throw result.getException()
@@ -35,7 +36,7 @@ internal class SongApiTest {
     @Test
     fun getDetail() {
         FuelManager.instance.basePath = "https://music.163.com"
-        songApi.getDetail().responseString { request, response, result ->
+        songApi.getDetail(id).responseString { request, response, result ->
             when (result) {
                 is Result.Failure -> {
                     throw result.getException()

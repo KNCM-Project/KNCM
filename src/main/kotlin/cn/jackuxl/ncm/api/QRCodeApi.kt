@@ -5,7 +5,7 @@ import cn.jackuxl.ncm.getRequest
 import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.core.Request
 
-class QRCodeApi() {
+class QRCodeApi {
     fun getKey(): Request {
         val params = UrlParamPair<Int>().params(
             "type" to 1

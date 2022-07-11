@@ -6,21 +6,36 @@ import cn.jackuxl.ncm.getRequest
 import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.core.Request
 
-class LoginApi(val user:User) {
-    fun loginByCellphone(): Request {
+class LoginApi {
+    fun loginByCellphone(
+        phone: String, // 手机号
+        password: String, // 密码
+        md5: Boolean = false, // 密码是否经过MD5加密
+        countrycode: Int = 86 // 国家码，用于国外手机号登录，例如美国传入：1
+    ): Request {
         val params = UrlParamPair<String>().params(
-            "phone" to user.account,
-            "countrycode" to user.countrycode.toString(),
+            "phone" to phone,
+            "countrycode" to countrycode.toString(),
             "rememberLogin" to "true",
+            "password" to if (md5) password else SecureUtil.md5(password)
         )
-
-        if(user.captcha.isNullOrBlank()){
-            params.param("password",if(user.md5) user.password else SecureUtil.md5(user.password))
-        }
-        else{
-            params.param("captcha", user.captcha!!)
-        }
-
+        return getRequest(
+            url = "/weapi/login/cellphone",
+            data = params,
+            referrer = "${FuelManager.instance.basePath}"
+        )
+    }
+    fun loginByCellphone(
+        phone: String, // 手机号
+        captcha: Int, // 验证码
+        countrycode: Int = 86 // 国家码，用于国外手机号登录，例如美国传入：1
+    ): Request {
+        val params = UrlParamPair<String>().params(
+            "phone" to phone,
+            "countrycode" to countrycode.toString(),
+            "rememberLogin" to "true",
+            "captcha" to captcha.toString()
+        )
         return getRequest(
             url = "/weapi/login/cellphone",
             data = params,
@@ -28,11 +43,14 @@ class LoginApi(val user:User) {
         )
     }
 
-
-    fun loginByEmail(): Request {
+    fun loginByEmail(
+        email: String, // 邮箱
+        password: String, // 密码
+        md5: Boolean = false, // 密码是否经过MD5加密
+    ): Request {
         val params = UrlParamPair<String>().params(
-            "username" to user.account,
-            "password" to if(user.md5) user.password else SecureUtil.md5(user.password),
+            "username" to email,
+            "password" to if (md5) password else SecureUtil.md5(password),
             "rememberLogin" to "true",
         )
 
@@ -71,14 +89,15 @@ class LoginApi(val user:User) {
         )
     }
 
+    fun getAccount(): Request {
+        val params = UrlParamPair<String>()
+        return getRequest(
+            url = "/weapi/nuser/account/get",
+            data = params,
+            referrer = "${FuelManager.instance.basePath}"
+        )
+    }
 
 
-    // TODO: 游客登陆
-    data class User(
-        var account:String, // 邮箱或手机号
-        var password:String, // 密码
-        var captcha:String? = null,
-        var md5:Boolean = false, // 密码是否经过MD5加密
-        var countrycode:Int = 86 // 国家码，用于国外手机号登录，例如美国传入：1
-    )
+    // TODO: 游客登录
 }

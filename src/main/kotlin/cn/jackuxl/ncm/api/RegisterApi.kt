@@ -6,14 +6,21 @@ import cn.jackuxl.ncm.getRequest
 import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.core.Request
 
-class RegisterApi() {
-    fun registerByCellphone(registerData: RegisterData):Request {
+class RegisterApi {
+    fun registerByCellphone(
+        nickname: String, // 用户名
+        phone: String, // 手机号
+        password: String, // 密码
+        countrycode: Int = 86, // 国家码，用于国外手机号登录，例如美国传入：1
+        captcha: Int, // 验证码
+        md5: Boolean = false // 密码是否经过MD5加密
+    ): Request {
         val params = UrlParamPair<String>().params(
-            "phone" to registerData.phone,
-            "countrycode" to registerData.countrycode.toString(),
-            "nickname" to registerData.nickname,
-            "password" to if(registerData.md5) registerData.password else SecureUtil.md5(registerData.password),
-            "captcha" to registerData.captcha
+            "phone" to phone,
+            "countrycode" to countrycode.toString(),
+            "nickname" to nickname,
+            "password" to if (md5) password else SecureUtil.md5(password),
+            "captcha" to captcha.toString()
         )
         return getRequest(
             url = "/weapi/register/cellphone",
@@ -21,20 +28,27 @@ class RegisterApi() {
             referrer = "${FuelManager.instance.basePath}"
         )
     }
-    fun checkNickName(nickname: String):Request {
-        val params = UrlParamPair<String>().param("nickname",nickname)
+
+    fun checkNickName(nickname: String): Request {
+        val params = UrlParamPair<String>().param("nickname", nickname)
         return getRequest(
             url = "/weapi/nickname/duplicated",
             data = params,
             referrer = "${FuelManager.instance.basePath}"
         )
     }
-    fun replaceCellPhone(replaceData: ReplaceData):Request {
+
+    fun replaceCellPhone(
+        phone: String, // 新手机号
+        oldcaptcha: String, // 旧手机验证码
+        captcha: String, // 新手机验证码
+        countrycode: Int = 86 // 国家码，用于国外手机号登录，例如美国传入：1
+    ): Request {
         val params = UrlParamPair<String>().params(
-            "captcha" to replaceData.captcha,
-            "oldcaptcha" to replaceData.oldcaptcha,
-            "phone" to replaceData.phone,
-            "ctcode" to replaceData.countrycode.toString()
+            "captcha" to captcha,
+            "oldcaptcha" to oldcaptcha,
+            "phone" to phone,
+            "ctcode" to countrycode.toString()
         )
         return getRequest(
             url = "/weapi/user/replaceCellphone",
@@ -65,20 +79,4 @@ class RegisterApi() {
 //            referrer = "${FuelManager.instance.basePath}"
 //        )
 //    }
-
-    data class RegisterData(
-        var nickname:String, // 用户名
-        var phone:String, // 手机号
-        var password:String, // 密码
-        var countrycode:Int = 86, // 国家码，用于国外手机号登录，例如美国传入：1
-        var captcha:String,
-        var md5:Boolean = false // 密码是否经过MD5加密
-    )
-
-    data class ReplaceData(
-        var phone:String, // 新手机号
-        var oldcaptcha:String,
-        var captcha:String,
-        var countrycode:Int = 86 // 国家码，用于国外手机号登录，例如美国传入：1
-    )
 }

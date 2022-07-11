@@ -7,7 +7,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Test
 
 internal class CaptchaApiTest {
-    private val captchaApi = CaptchaApi("13800000000")
+    private val captchaApi = CaptchaApi("18000000000")
     @Test
     fun send() {
         FuelManager.instance.basePath = "https://music.163.com"

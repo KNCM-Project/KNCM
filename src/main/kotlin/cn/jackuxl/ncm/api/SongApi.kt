@@ -9,8 +9,8 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-class SongApi(val song: Song) {
-    fun getComments(offset: Int): Request {
+class SongApi {
+    fun getComments(id:Long, offset: Int): Request {
         val param = UrlParamPair<String>().params(
             "username" to "",
             "password" to "",
@@ -18,22 +18,20 @@ class SongApi(val song: Song) {
             "offset" to offset.toString()
         )
         return getRequest(
-            url = "/weapi/v1/resource/comments/R_SO_4_${song.id}",
+            url = "/weapi/v1/resource/comments/R_SO_4_${id}",
             data = param,
-            referrer = "${FuelManager.instance.basePath}/song?id=${song.id}"
+            referrer = "${FuelManager.instance.basePath}/song?id=${id}"
         )
     }
 
-    fun getDetail(): Request {
+    fun getDetail(id:Long): Request {
         val param = UrlParamPair<String>().params(
-            "c" to Json.encodeToString(listOf(mapOf("id" to song.id.toInt()))),
+            "c" to Json.encodeToString(listOf(mapOf("id" to id))),
         )
         return getRequest(
             url = "/weapi/v3/song/detail",
             data = param,
-            referrer = "${FuelManager.instance.basePath}/song?id=${song.id}"
+            referrer = "${FuelManager.instance.basePath}/song?id=${id}"
         )
     }
-
-    data class Song(var id:String)
 }
