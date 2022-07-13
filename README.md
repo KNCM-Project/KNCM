@@ -267,14 +267,9 @@
 - [ ] 内部版本接口
 - [ ] 黑胶时光机
 
-## 感谢
+## 贡献者 ✨
 
-[leftvalue/NeteaseApi](https://github.com/leftvalue/NeteaseApi) - WeApi 加密算法
-
-[Binaryify/NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi) - EApi & LinuxApi 加密算法，接口参考
-## Contributors ✨
-
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+感谢以下用户的贡献 ([Emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -290,4 +285,8 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+## 感谢
+
+[leftvalue/NeteaseApi](https://github.com/leftvalue/NeteaseApi) - WeApi 加密算法
+
+[Binaryify/NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi) - EApi & LinuxApi 加密算法，接口参考
