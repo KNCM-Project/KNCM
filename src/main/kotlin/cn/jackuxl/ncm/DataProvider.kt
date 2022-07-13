@@ -17,3 +17,4 @@ inline fun <reified T> getRequest(url:String, data:UrlParamPair<T>, referrer:Str
         .header("referrer",referrer)
         .header("cookie",DataProvider.cookie)
 }
+

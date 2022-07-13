@@ -2,10 +2,8 @@ package cn.jackuxl.ncm.api
 
 import cn.jackuxl.ncm.entity.UrlParamPair
 import cn.jackuxl.ncm.getRequest
-import cn.jackuxl.ncm.util.JSSecret
 import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.core.Request
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
@@ -24,7 +22,7 @@ class SongApi {
         )
     }
 
-    fun getDetail(id:Long): Request {
+    fun getDetail(id: Long): Request {
         val param = UrlParamPair<String>().params(
             "c" to Json.encodeToString(listOf(mapOf("id" to id))),
         )
@@ -34,4 +32,16 @@ class SongApi {
             referrer = "${FuelManager.instance.basePath}/song?id=${id}"
         )
     }
+
+    // TODO: eapi
+//    fun getUrl(id:Long,br:String): Request {
+//        val param = UrlParamPair<String>().params(
+//            "c" to Json.encodeToString(listOf(mapOf("id" to id))),
+//        )
+//        return getRequest(
+//            url = "/weapi/v3/song/detail",
+//            data = param,
+//            referrer = "${FuelManager.instance.basePath}/song?id=${id}"
+//        )
+//    }
 }
