@@ -3,9 +3,9 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-**K**otlin **N**etease **C**loud **M**usic
+🎉**K**otlin **N**etease **C**loud **M**usic
 
-## Todo
+## Todo ✅
 
 - [x] 登录
   1. 手机登录
@@ -269,7 +269,7 @@
 
 ## 贡献者 ✨
 
-感谢以下用户的贡献 ([Emoji key](https://allcontributors.org/docs/en/emoji-key)):
+感谢以下用户的贡献：
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -286,7 +286,7 @@
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-## 感谢
+## 感谢 💕
 
 [leftvalue/NeteaseApi](https://github.com/leftvalue/NeteaseApi) - WeApi 加密算法
 
