@@ -16,6 +16,15 @@
         "doc",
         "security"
       ]
+    },
+    {
+      "login": "Kamishirasawa-keine",
+      "name": "Keine",
+      "avatar_url": "https://avatars.githubusercontent.com/u/106482161?v=4",
+      "profile": "https://github.com/Kamishirasawa-keine",
+      "contributions": [
+        "security"
+      ]
     }
   ],
   "contributorsPerLine": 7,
