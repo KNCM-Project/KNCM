@@ -1,6 +1,6 @@
 # 网易云音乐 Kotlin SDK
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 **K**otlin **N**etease **C**loud **M**usic
@@ -277,6 +277,7 @@
 <table>
   <tr>
     <td align="center"><a href="https://github.com/JackuXL"><img src="https://avatars.githubusercontent.com/u/58510349?v=4?s=100" width="100px;" alt=""/><br /><sub><b>JackuXL</b></sub></a><br /><a href="https://github.com/JackuXL/KNCM/commits?author=JackuXL" title="Code">💻</a> <a href="#ideas-JackuXL" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/JackuXL/KNCM/commits?author=JackuXL" title="Documentation">📖</a> <a href="#security-JackuXL" title="Security">🛡️</a></td>
+    <td align="center"><a href="https://github.com/Kamishirasawa-keine"><img src="https://avatars.githubusercontent.com/u/106482161?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Keine</b></sub></a><br /><a href="#security-Kamishirasawa-keine" title="Security">🛡️</a></td>
   </tr>
 </table>
 
