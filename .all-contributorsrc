@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "JackuXL",
+      "name": "JackuXL",
+      "avatar_url": "https://avatars.githubusercontent.com/u/58510349?v=4",
+      "profile": "https://github.com/JackuXL",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "KNCM",
+  "projectOwner": "JackuXL",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
