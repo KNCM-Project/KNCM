@@ -1,8 +1,8 @@
-package cn.jackuxl.ncm.api
+package cn.jackuxl.kncm.api
 
 import cn.hutool.crypto.SecureUtil
-import cn.jackuxl.ncm.entity.UrlParamPair
-import cn.jackuxl.ncm.getRequest
+import cn.jackuxl.kncm.entity.UrlParamPair
+import cn.jackuxl.kncm.getRequest
 import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.core.Request
 

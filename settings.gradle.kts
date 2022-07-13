@@ -1,2 +1,2 @@
-rootProject.name = "NeteaseCloudMusic-SDK"
+rootProject.name = "KNCM"
 

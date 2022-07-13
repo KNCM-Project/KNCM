@@ -1,4 +1,4 @@
-package cn.jackuxl.ncm.entity
+package cn.jackuxl.kncm.entity
 import kotlinx.serialization.Serializable
 
 @Serializable

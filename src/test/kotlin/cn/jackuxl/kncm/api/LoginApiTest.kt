@@ -1,10 +1,10 @@
-package cn.jackuxl.ncm.api
+package cn.jackuxl.kncm.api
 
-import org.junit.jupiter.api.Test
 import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.result.Result
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
+import org.junit.jupiter.api.Test
 
 internal class LoginApiTest {
     private val userApi = LoginApi()

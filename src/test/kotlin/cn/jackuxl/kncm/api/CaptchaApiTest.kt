@@ -1,4 +1,4 @@
-package cn.jackuxl.ncm.api
+package cn.jackuxl.kncm.api
 
 import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.result.Result
@@ -6,18 +6,16 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Test
 
-internal class SearchApiTest {
-    private val searchApi = SearchApi()
-
+internal class CaptchaApiTest {
+    private val captchaApi = CaptchaApi("18000000000")
     @Test
-    fun search() {
+    fun send() {
         FuelManager.instance.basePath = "https://music.163.com"
-        searchApi.search("海阔天空").responseString { request, response, result ->
+        captchaApi.send().responseString { request, response, result ->
             when (result) {
                 is Result.Failure -> {
                     throw result.getException()
                 }
-
                 is Result.Success -> {
                     println(result.get())
                 }
@@ -29,33 +27,13 @@ internal class SearchApiTest {
     }
 
     @Test
-    fun searchVoice() {
+    fun verify() {
         FuelManager.instance.basePath = "https://music.163.com"
-        searchApi.search("海阔天空", 2000).responseString { request, response, result ->
+        captchaApi.verify("2333").responseString { request, response, result ->
             when (result) {
                 is Result.Failure -> {
                     throw result.getException()
                 }
-
-                is Result.Success -> {
-                    println(result.get())
-                }
-            }
-        }
-        runBlocking {     // 这个表达式阻塞了主线程
-            delay(3000L)  //阻塞主线程防止过快退出
-        }
-    }
-
-    @Test
-    fun cloudsearch() {
-        FuelManager.instance.basePath = "https://music.163.com"
-        searchApi.cloudsearch("海阔天空").responseString { request, response, result ->
-            when (result) {
-                is Result.Failure -> {
-                    throw result.getException()
-                }
-
                 is Result.Success -> {
                     println(result.get())
                 }

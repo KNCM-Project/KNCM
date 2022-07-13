@@ -1,4 +1,4 @@
-package cn.jackuxl.ncm.util
+package cn.jackuxl.kncm.util
 
 import com.github.kittinunf.fuel.core.Parameters
 import jdk.nashorn.api.scripting.ScriptObjectMirror
@@ -36,17 +36,4 @@ object JSSecret {
             "encSecKey" to params[encSecKey].toString()
         )
     }
-
-//    fun eapi(url:String, params:String):Parameters{
-//        val message = "nobody${url}use${params}md5forencrypt"
-//        val messageDigest = SecureUtil.createMessageDigest("MD5")
-//        messageDigest.update(message.toByte())
-//        val data = "${url}-36cd479b6b5-${params}-36cd479b6b5-${messageDigest.digest("hex".toByteArray())}"
-//        val eapiKey = "e82ckenh8dichen8"
-//
-//        val cipher = SecureUtil.createCipher("aes-128-ecb")
-//        cipher.init(Cipher.ENCRYPT_MODE, SecretKeySpec(eapiKey.toByteArray(),)
-//
-//    }
-
 }

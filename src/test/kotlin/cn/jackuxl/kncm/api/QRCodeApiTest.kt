@@ -1,23 +1,17 @@
-package cn.jackuxl.ncm.api
+package cn.jackuxl.kncm.api
 
 import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.result.Result
-import org.junit.jupiter.api.Test
-import cn.jackuxl.ncm.api.SongApi.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
 
-internal class SongApiTest {
-    private val songApi = SongApi()
-    private val id = 1960903012L
+internal class QRCodeApiTest {
+    val qrCodeApi:QRCodeApi = QRCodeApi()
     @Test
-    fun getComments() {
+    fun getKey() {
         FuelManager.instance.basePath = "https://music.163.com"
-        songApi.getComments(id,2).responseString { request, response, result ->
+        qrCodeApi.getKey().responseString { request, response, result ->
             when (result) {
                 is Result.Failure -> {
                     throw result.getException()
@@ -32,11 +26,16 @@ internal class SongApiTest {
         }
     }
 
+    @Test
+    fun createQRCode() {
+        FuelManager.instance.basePath = "https://music.163.com"
+        println(qrCodeApi.createQRCode("c011d352-d445-4e04-8fb3-f7cd8f7f3b01"))
+    }
 
     @Test
-    fun getDetail() {
+    fun checkStatus() {
         FuelManager.instance.basePath = "https://music.163.com"
-        songApi.getDetail(id).responseString { request, response, result ->
+        qrCodeApi.checkStatus("c011d352-d445-4e04-8fb3-f7cd8f7f3b01").responseString { request, response, result ->
             when (result) {
                 is Result.Failure -> {
                     throw result.getException()
@@ -47,7 +46,7 @@ internal class SongApiTest {
             }
         }
         runBlocking {     // 这个表达式阻塞了主线程
-            delay(10000000L)  //阻塞主线程防止过快退出
+            delay(3000L)  //阻塞主线程防止过快退出
         }
     }
 }

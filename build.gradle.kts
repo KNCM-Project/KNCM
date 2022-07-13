@@ -20,8 +20,8 @@ tasks.test {
 dependencies {
     // Kotlin Base
     implementation(kotlin("stdlib"))
-    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
-    with("1.6.3"){
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
+    with("1.6.3") {
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$this")
         testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$this")
     }

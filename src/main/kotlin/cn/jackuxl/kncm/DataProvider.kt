@@ -1,7 +1,7 @@
-package cn.jackuxl.ncm
+package cn.jackuxl.kncm
 
-import cn.jackuxl.ncm.entity.UrlParamPair
-import cn.jackuxl.ncm.util.JSSecret
+import cn.jackuxl.kncm.entity.UrlParamPair
+import cn.jackuxl.kncm.util.JSSecret
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.core.Request
 import kotlinx.serialization.encodeToString

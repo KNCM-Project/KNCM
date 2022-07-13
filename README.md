@@ -1,6 +1,6 @@
-# 网易云音乐 SDK
+# 网易云音乐 Kotlin SDK
 
-网易云音乐第三方 Kotlin SDK
+**K**otlin **N**etease **C**loud **M**usic
 
 ## Todo
 
@@ -266,6 +266,6 @@
 
 ## 感谢
 
-[leftvalue/NeteaseApi](https://github.com/leftvalue/NeteaseApi) - 加密核心算法
+[leftvalue/NeteaseApi](https://github.com/leftvalue/NeteaseApi) - WeApi 加密算法
 
-[Binaryify/NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi) - 接口参考
+[Binaryify/NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi) - EApi & LinuxApi 加密算法，接口参考
