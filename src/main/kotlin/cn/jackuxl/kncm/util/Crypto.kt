@@ -3,7 +3,7 @@ package cn.jackuxl.kncm.util
 
 import cn.hutool.core.codec.Base64
 import cn.hutool.core.util.HexUtil
-import cn.hutool.core.util.StrUtil
+import cn.hutool.core.util.RandomUtil
 import cn.hutool.crypto.SecureUtil
 import java.math.BigInteger
 import java.security.KeyFactory
@@ -12,6 +12,7 @@ import java.security.spec.RSAPublicKeySpec
 import javax.crypto.Cipher
 import javax.crypto.spec.IvParameterSpec
 import javax.crypto.spec.SecretKeySpec
+import kotlin.math.abs
 
 
 object Crypto {
@@ -37,7 +38,7 @@ object Crypto {
     }
 
     private fun rsaEncrypt(value: String, modulus: BigInteger, pubExp: BigInteger): ByteArray {
-        val cipher = Cipher.getInstance("RSA/ECB/PKCS1PADDING")
+        val cipher = Cipher.getInstance("RSA/ECB/NoPadding")
         val pubKeySpec = RSAPublicKeySpec(modulus, pubExp)
         val a = SecureUtil.rsa(
             null,
@@ -47,7 +48,7 @@ object Crypto {
         val key = keyFactory.generatePublic(pubKeySpec)
 
         cipher.init(Cipher.ENCRYPT_MODE, key)
-        return cipher.doFinal(StrUtil.fill(value, '0', 128, true).toByteArray())
+        return cipher.doFinal(value.toByteArray())
     }
 
     fun linuxApi(param: String): Map<String, String> {
@@ -78,17 +79,10 @@ object Crypto {
         val pubExp = BigInteger("010001", 16)
 
 
-//        val secretKey = ByteArray(16)
-//        RandomUtil.randomBytes(16).forEachIndexed { index, byte ->
-//            secretKey[index] = Character.codePointAt(base62, abs(byte.toInt())%62).toByte()
-//        }
-        val secretKey = "YPaBKooHeuheSC1e".toByteArray()
-
-        println(
-            Base64.encode(
-                aesEncrypt(param, presentKey, iv)
-            )
-        )
+        val secretKey = ByteArray(16)
+        RandomUtil.randomBytes(16).forEachIndexed { index, byte ->
+            secretKey[index] = Character.codePointAt(base62, abs(byte.toInt()) % 62).toByte()
+        }
         return listOf(
             "params" to Base64.encode(
                 aesEncrypt(

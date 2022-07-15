@@ -1,7 +1,6 @@
 package cn.jackuxl.kncm.api
 
 import cn.hutool.crypto.SecureUtil
-import cn.jackuxl.kncm.entity.UrlParamPair
 import cn.jackuxl.kncm.getRequest
 import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.core.Request
@@ -13,7 +12,7 @@ class LoginApi {
         md5: Boolean = false, // 密码是否经过MD5加密
         countrycode: Int = 86 // 国家码，用于国外手机号登录，例如美国传入：1
     ): Request {
-        val params = UrlParamPair<String>().params(
+        val params = mapOf(
             "phone" to phone,
             "countrycode" to countrycode.toString(),
             "rememberLogin" to "true",
@@ -30,7 +29,7 @@ class LoginApi {
         captcha: Int, // 验证码
         countrycode: Int = 86 // 国家码，用于国外手机号登录，例如美国传入：1
     ): Request {
-        val params = UrlParamPair<String>().params(
+        val params = mapOf(
             "phone" to phone,
             "countrycode" to countrycode.toString(),
             "rememberLogin" to "true",
@@ -48,7 +47,7 @@ class LoginApi {
         password: String, // 密码
         md5: Boolean = false, // 密码是否经过MD5加密
     ): Request {
-        val params = UrlParamPair<String>().params(
+        val params = mapOf(
             "username" to email,
             "password" to if (md5) password else SecureUtil.md5(password),
             "rememberLogin" to "true",
@@ -63,7 +62,7 @@ class LoginApi {
 
 
     fun refresh(): Request {
-        val params = UrlParamPair<String>()
+        val params = mapOf<String, String>()
         return getRequest(
             url = "/weapi/login/token/refresh",
             data = params,
@@ -72,7 +71,7 @@ class LoginApi {
     }
 
     fun logout(): Request {
-        val params = UrlParamPair<String>()
+        val params = mapOf<String, String>()
         return getRequest(
             url = "/weapi/logout",
             data = params,
@@ -81,7 +80,7 @@ class LoginApi {
     }
 
     fun getStatus(): Request {
-        val params = UrlParamPair<String>()
+        val params = mapOf<String, String>()
         return getRequest(
             url = "/weapi/w/nuser/account/get",
             data = params,
@@ -90,7 +89,7 @@ class LoginApi {
     }
 
     fun getAccount(): Request {
-        val params = UrlParamPair<String>()
+        val params = mapOf<String, String>()
         return getRequest(
             url = "/weapi/nuser/account/get",
             data = params,

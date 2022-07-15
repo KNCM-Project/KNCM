@@ -1,13 +1,12 @@
 package cn.jackuxl.kncm.api
 
-import cn.jackuxl.kncm.entity.UrlParamPair
 import cn.jackuxl.kncm.getRequest
 import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.core.Request
 
 class CaptchaApi(val phone:String,val ctcode:Int=86) {
     fun send(): Request {
-        val params = UrlParamPair<String>().params(
+        val params = mapOf(
             "cellphone" to phone,
             "ctcode" to ctcode.toString(),
         )
@@ -20,7 +19,7 @@ class CaptchaApi(val phone:String,val ctcode:Int=86) {
     }
 
     fun verify(captcha:String): Request {
-        val params = UrlParamPair<String>().params(
+        val params = mapOf(
             "cellphone" to phone,
             "ctcode" to ctcode.toString(),
             "captcha" to captcha

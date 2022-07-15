@@ -1,13 +1,12 @@
 package cn.jackuxl.kncm.api
 
-import cn.jackuxl.kncm.entity.UrlParamPair
 import cn.jackuxl.kncm.getRequest
 import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.core.Request
 
 class QRCodeApi {
     fun getKey(): Request {
-        val params = UrlParamPair<Int>().params(
+        val params = mapOf(
             "type" to 1
         )
 
@@ -23,7 +22,7 @@ class QRCodeApi {
     }
 
     fun checkStatus(key:String): Request {
-        val params = UrlParamPair<String>().params(
+        val params = mapOf(
             "key" to key,
             "type" to "1"
         )

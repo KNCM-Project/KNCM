@@ -1,7 +1,6 @@
 package cn.jackuxl.kncm.api
 
 import cn.hutool.crypto.SecureUtil
-import cn.jackuxl.kncm.entity.UrlParamPair
 import cn.jackuxl.kncm.getRequest
 import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.core.Request
@@ -15,7 +14,7 @@ class RegisterApi {
         captcha: Int, // 验证码
         md5: Boolean = false // 密码是否经过MD5加密
     ): Request {
-        val params = UrlParamPair<String>().params(
+        val params = mapOf(
             "phone" to phone,
             "countrycode" to countrycode.toString(),
             "nickname" to nickname,
@@ -30,7 +29,7 @@ class RegisterApi {
     }
 
     fun checkNickName(nickname: String): Request {
-        val params = UrlParamPair<String>().param("nickname", nickname)
+        val params = mapOf("nickname" to nickname)
         return getRequest(
             url = "/weapi/nickname/duplicated",
             data = params,
@@ -44,7 +43,7 @@ class RegisterApi {
         captcha: String, // 新手机验证码
         countrycode: Int = 86 // 国家码，用于国外手机号登录，例如美国传入：1
     ): Request {
-        val params = UrlParamPair<String>().params(
+        val params = mapOf(
             "captcha" to captcha,
             "oldcaptcha" to oldcaptcha,
             "phone" to phone,
@@ -69,7 +68,7 @@ class RegisterApi {
 
     // TODO: 检测注册（eapi）
 //    fun isRegistered(phone:String,countrycode: Int=86):Request{
-//        val params = UrlParamPair<String>().params(
+//        val params = mapOf(
 //            "phone" to phone,
 //            "countrycode" to countrycode.toString(),
 //        )

@@ -1,6 +1,5 @@
 package cn.jackuxl.kncm.api
 
-import cn.jackuxl.kncm.entity.UrlParamPair
 import cn.jackuxl.kncm.getRequest
 import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.core.Request
@@ -9,7 +8,7 @@ import kotlinx.serialization.json.Json
 
 class SongApi {
     fun getComments(id:Long, offset: Int): Request {
-        val param = UrlParamPair<String>().params(
+        val param = mapOf(
             "username" to "",
             "password" to "",
             "rememberLogin" to "true",
@@ -23,7 +22,7 @@ class SongApi {
     }
 
     fun getDetail(id: Long): Request {
-        val param = UrlParamPair<String>().params(
+        val param = mapOf(
             "c" to Json.encodeToString(listOf(mapOf("id" to id))),
         )
         return getRequest(
@@ -35,7 +34,7 @@ class SongApi {
 
     // TODO: eapi
 //    fun getUrl(id:Long,br:String): Request {
-//        val param = UrlParamPair<String>().params(
+//        val param = mapOf(
 //            "c" to Json.encodeToString(listOf(mapOf("id" to id))),
 //        )
 //        return getRequest(

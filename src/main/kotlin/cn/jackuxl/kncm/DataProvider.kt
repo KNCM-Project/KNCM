@@ -1,6 +1,5 @@
 package cn.jackuxl.kncm
 
-import cn.jackuxl.kncm.entity.UrlParamPair
 import cn.jackuxl.kncm.util.Crypto
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.core.Request
@@ -11,9 +10,8 @@ object DataProvider {
     val cookie = ""
 }
 
-inline fun <reified T> getRequest(url:String, data:UrlParamPair<T>, referrer:String): Request {
-    //JSSecret.transData(Json.encodeToString(data.params))
-    return Fuel.post(url, Crypto.weApi(Json.encodeToString(data.params)))
+inline fun <reified T> getRequest(url: String, data: Param<T>, referrer: String): Request {
+    return Fuel.post(url, Crypto.weApi(Json.encodeToString(data)))
         .header(
             "user-agent",
             "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0 Safari/605.1.15"
@@ -22,3 +20,4 @@ inline fun <reified T> getRequest(url:String, data:UrlParamPair<T>, referrer:Str
         .header("cookie", DataProvider.cookie)
 }
 
+typealias Param<T> = Map<String, T>

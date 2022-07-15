@@ -288,6 +288,6 @@
 
 ## 感谢 💕
 
-[leftvalue/NeteaseApi](https://github.com/leftvalue/NeteaseApi) - WeApi 加密算法
+[Binaryify/NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi) - Api 加密算法、接口参考
 
-[Binaryify/NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi) - EApi & LinuxApi 加密算法，接口参考
+<del>[leftvalue/NeteaseApi](https://github.com/leftvalue/NeteaseApi) - WeApi 加密算法</del> 已于 2022.7.15 弃用并删除相关代码

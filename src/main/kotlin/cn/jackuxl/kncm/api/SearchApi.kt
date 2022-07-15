@@ -1,6 +1,5 @@
 package cn.jackuxl.kncm.api
 
-import cn.jackuxl.kncm.entity.UrlParamPair
 import cn.jackuxl.kncm.getRequest
 import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.core.Request
@@ -13,7 +12,7 @@ class SearchApi {
         offset: Int = 0 // 偏移数量，用于分页 , 如 : 如 :( 页数 -1)*30, 其中 30 为 limit 的值
     ): Request {
         if (type == 2000) {
-            val params = UrlParamPair<String>().params(
+            val params = mapOf(
                 "keyword" to keyword,
                 "scene" to "normal",
                 "limit" to limit.toString(),
@@ -25,7 +24,7 @@ class SearchApi {
                 referrer = "${FuelManager.instance.basePath}"
             )
         }
-        val params = UrlParamPair<String>().params(
+        val params = mapOf(
             "s" to keyword,
             "type" to type.toString(),
             "limit" to limit.toString(),
@@ -45,7 +44,7 @@ class SearchApi {
         limit: Int = 30, // 返回数量
         offset: Int = 0 // 偏移数量，用于分页 , 如 : 如 :( 页数 -1)*30, 其中 30 为 limit 的值
     ): Request {
-        val params = UrlParamPair<String>().params(
+        val params = mapOf(
             "s" to keyword,
             "type" to type.toString(),
             "limit" to limit.toString(),
