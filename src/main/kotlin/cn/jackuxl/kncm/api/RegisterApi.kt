@@ -3,7 +3,6 @@ package cn.jackuxl.kncm.api
 import cn.hutool.crypto.SecureUtil
 import cn.jackuxl.kncm.entity.ApiMode
 import cn.jackuxl.kncm.getRequest
-import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.core.Request
 
 class RegisterApi {
@@ -25,8 +24,7 @@ class RegisterApi {
         return getRequest(
             url = "/weapi/register/cellphone",
             data = params,
-            mode = ApiMode.WE_API,
-            referrer = "${FuelManager.instance.basePath}"
+            mode = ApiMode.WE_API
         )
     }
 
@@ -35,8 +33,7 @@ class RegisterApi {
         return getRequest(
             url = "/weapi/nickname/duplicated",
             data = params,
-            mode = ApiMode.WE_API,
-            referrer = "${FuelManager.instance.basePath}"
+            mode = ApiMode.WE_API
         )
     }
 
@@ -55,8 +52,7 @@ class RegisterApi {
         return getRequest(
             url = "/weapi/user/replaceCellphone",
             data = params,
-            mode = ApiMode.WE_API,
-            referrer = "${FuelManager.instance.basePath}"
+            mode = ApiMode.WE_API
         )
     }
 
@@ -65,21 +61,19 @@ class RegisterApi {
         return getRequest(
             url = "/eapi/activate/initProfile",
             data = params,
-            mode = ApiMode.E_API,
-            referrer = "${FuelManager.instance.basePath}"
+            mode = ApiMode.E_API
         )
     }
 
-    // TODO: 检测注册（eapi）
-//    fun isRegistered(phone:String,countrycode: Int=86):Request{
-//        val params = mapOf(
-//            "phone" to phone,
-//            "countrycode" to countrycode.toString(),
-//        )
-//        return getRequest(
-//            url = "/weapi/register/cellphone",
-//            data = params,
-//            referrer = "${FuelManager.instance.basePath}"
-//        )
-//    }
+    fun checkPhoneExistence(phone: String, countrycode: Int = 86): Request {
+        val params = mapOf(
+            "cellphone" to phone,
+            "countrycode" to countrycode.toString(),
+        )
+        return getRequest(
+            url = "/eapi/cellphone/existence/check",
+            data = params,
+            mode = ApiMode.E_API
+        )
+    }
 }

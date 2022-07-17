@@ -2,7 +2,6 @@ package cn.jackuxl.kncm.api
 
 import cn.jackuxl.kncm.entity.ApiMode
 import cn.jackuxl.kncm.getRequest
-import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.core.Request
 
 class SearchApi {
@@ -22,8 +21,7 @@ class SearchApi {
             return getRequest(
                 url = "/weapi/search/voice/get",
                 data = params,
-                mode = ApiMode.WE_API,
-                referrer = "${FuelManager.instance.basePath}"
+                mode = ApiMode.WE_API
             )
         }
         val params = mapOf(
@@ -35,8 +33,7 @@ class SearchApi {
         return getRequest(
             url = "/weapi/search/get",
             data = params,
-            mode = ApiMode.WE_API,
-            referrer = "${FuelManager.instance.basePath}"
+            mode = ApiMode.WE_API
         )
 
     }
@@ -57,8 +54,7 @@ class SearchApi {
         return getRequest(
             url = "/weapi/cloudsearch/pc",
             data = params,
-            mode = ApiMode.WE_API,
-            referrer = "${FuelManager.instance.basePath}"
+            mode = ApiMode.WE_API
         )
     }
 }
