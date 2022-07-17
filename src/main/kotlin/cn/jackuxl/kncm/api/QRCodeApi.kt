@@ -1,5 +1,6 @@
 package cn.jackuxl.kncm.api
 
+import cn.jackuxl.kncm.entity.ApiMode
 import cn.jackuxl.kncm.getRequest
 import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.core.Request
@@ -13,6 +14,7 @@ class QRCodeApi {
         return getRequest(
             url = "/weapi/login/qrcode/unikey",
             data = params,
+            mode = ApiMode.WE_API,
             referrer = "${FuelManager.instance.basePath}"
         )
     }
@@ -29,6 +31,7 @@ class QRCodeApi {
         return getRequest(
             url = "/weapi/login/qrcode/client/login",
             data = params,
+            mode = ApiMode.WE_API,
             referrer = "${FuelManager.instance.basePath}"
         )
     }

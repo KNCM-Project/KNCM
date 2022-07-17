@@ -51,18 +51,18 @@ object Crypto {
         return cipher.doFinal(value.toByteArray())
     }
 
-    fun linuxApi(param: String): Map<String, String> {
-        return mapOf(
+    fun linuxApi(param: String): List<Pair<String, String>> {
+        return listOf(
             "eparams" to String(HexUtil.encodeHex(aesEncrypt(param, linuxApiKey.toByteArray()))).uppercase()
         )
     }
 
 
-    fun eApi(url: String, param: String): Map<String, String> {
+    fun eApi(url: String, param: String): List<Pair<String, String>> {
         val message = "nobody${url}use${param}md5forencrypt"
         val digest = String(HexUtil.encodeHex(MessageDigest.getInstance("MD5").digest(message.toByteArray())))
         val data = "${url}-36cd479b6b5-${param}-36cd479b6b5-${digest}"
-        return mapOf(
+        return listOf(
             "params" to String(HexUtil.encodeHex(aesEncrypt(data, eApiKey.toByteArray()))).uppercase()
         )
     }

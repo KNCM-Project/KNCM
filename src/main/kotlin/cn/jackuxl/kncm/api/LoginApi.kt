@@ -1,6 +1,7 @@
 package cn.jackuxl.kncm.api
 
 import cn.hutool.crypto.SecureUtil
+import cn.jackuxl.kncm.entity.ApiMode
 import cn.jackuxl.kncm.getRequest
 import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.core.Request
@@ -21,6 +22,7 @@ class LoginApi {
         return getRequest(
             url = "/weapi/login/cellphone",
             data = params,
+            mode = ApiMode.WE_API,
             referrer = "${FuelManager.instance.basePath}"
         )
     }
@@ -38,6 +40,7 @@ class LoginApi {
         return getRequest(
             url = "/weapi/login/cellphone",
             data = params,
+            mode = ApiMode.WE_API,
             referrer = "${FuelManager.instance.basePath}"
         )
     }
@@ -56,6 +59,7 @@ class LoginApi {
         return getRequest(
             url = "/weapi/login",
             data = params,
+            mode = ApiMode.WE_API,
             referrer = "${FuelManager.instance.basePath}"
         )
     }
@@ -66,6 +70,7 @@ class LoginApi {
         return getRequest(
             url = "/weapi/login/token/refresh",
             data = params,
+            mode = ApiMode.WE_API,
             referrer = "${FuelManager.instance.basePath}"
         )
     }
@@ -75,6 +80,7 @@ class LoginApi {
         return getRequest(
             url = "/weapi/logout",
             data = params,
+            mode = ApiMode.WE_API,
             referrer = "${FuelManager.instance.basePath}"
         )
     }
@@ -84,6 +90,7 @@ class LoginApi {
         return getRequest(
             url = "/weapi/w/nuser/account/get",
             data = params,
+            mode = ApiMode.WE_API,
             referrer = "${FuelManager.instance.basePath}"
         )
     }
@@ -93,6 +100,7 @@ class LoginApi {
         return getRequest(
             url = "/weapi/nuser/account/get",
             data = params,
+            mode = ApiMode.WE_API,
             referrer = "${FuelManager.instance.basePath}"
         )
     }

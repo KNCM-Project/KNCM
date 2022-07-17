@@ -1,5 +1,6 @@
 package cn.jackuxl.kncm.api
 
+import cn.jackuxl.kncm.entity.ApiMode
 import cn.jackuxl.kncm.getRequest
 import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.core.Request
@@ -14,6 +15,7 @@ class CaptchaApi(val phone:String,val ctcode:Int=86) {
         return getRequest(
             url = "/weapi/sms/captcha/sent",
             data = params,
+            mode = ApiMode.WE_API,
             referrer = "${FuelManager.instance.basePath}"
         )
     }
@@ -28,6 +30,7 @@ class CaptchaApi(val phone:String,val ctcode:Int=86) {
         return getRequest(
             url = "/weapi/sms/captcha/verify",
             data = params,
+            mode = ApiMode.WE_API,
             referrer = "${FuelManager.instance.basePath}"
         )
     }

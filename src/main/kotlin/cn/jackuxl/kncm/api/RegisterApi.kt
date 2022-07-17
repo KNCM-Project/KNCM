@@ -1,6 +1,7 @@
 package cn.jackuxl.kncm.api
 
 import cn.hutool.crypto.SecureUtil
+import cn.jackuxl.kncm.entity.ApiMode
 import cn.jackuxl.kncm.getRequest
 import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.core.Request
@@ -10,9 +11,9 @@ class RegisterApi {
         nickname: String, // 用户名
         phone: String, // 手机号
         password: String, // 密码
-        countrycode: Int = 86, // 国家码，用于国外手机号登录，例如美国传入：1
         captcha: Int, // 验证码
-        md5: Boolean = false // 密码是否经过MD5加密
+        md5: Boolean = false, // 密码是否经过MD5加密
+        countrycode: Int = 86, // 国家码，用于国外手机号登录，例如美国传入：1
     ): Request {
         val params = mapOf(
             "phone" to phone,
@@ -24,6 +25,7 @@ class RegisterApi {
         return getRequest(
             url = "/weapi/register/cellphone",
             data = params,
+            mode = ApiMode.WE_API,
             referrer = "${FuelManager.instance.basePath}"
         )
     }
@@ -33,38 +35,40 @@ class RegisterApi {
         return getRequest(
             url = "/weapi/nickname/duplicated",
             data = params,
+            mode = ApiMode.WE_API,
             referrer = "${FuelManager.instance.basePath}"
         )
     }
 
     fun replaceCellPhone(
         phone: String, // 新手机号
-        oldcaptcha: String, // 旧手机验证码
-        captcha: String, // 新手机验证码
+        oldcaptcha: Int, // 旧手机验证码
+        captcha: Int, // 新手机验证码
         countrycode: Int = 86 // 国家码，用于国外手机号登录，例如美国传入：1
     ): Request {
         val params = mapOf(
-            "captcha" to captcha,
-            "oldcaptcha" to oldcaptcha,
+            "captcha" to captcha.toString(),
+            "oldcaptcha" to oldcaptcha.toString(),
             "phone" to phone,
             "ctcode" to countrycode.toString()
         )
         return getRequest(
             url = "/weapi/user/replaceCellphone",
             data = params,
+            mode = ApiMode.WE_API,
             referrer = "${FuelManager.instance.basePath}"
         )
     }
 
-    // TODO: 初始化昵称（eapi）
-//    fun initNickName(nickname: String):Request {
-//        val params = UrlParamPair<String>().param("nickname",nickname)
-//        return getRequest(
-//            url = "/weapi/nickname/duplicated",
-//            data = params,
-//            referrer = "${FuelManager.instance.basePath}"
-//        )
-//    }
+    fun initNickName(nickname: String): Request {
+        val params = mapOf("nickname" to nickname)
+        return getRequest(
+            url = "/eapi/activate/initProfile",
+            data = params,
+            mode = ApiMode.E_API,
+            referrer = "${FuelManager.instance.basePath}"
+        )
+    }
 
     // TODO: 检测注册（eapi）
 //    fun isRegistered(phone:String,countrycode: Int=86):Request{

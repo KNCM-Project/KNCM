@@ -5,14 +5,14 @@ import com.github.kittinunf.result.Result
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Test
 
-internal class SearchApiTest {
-    private val searchApi = SearchApi()
+internal class RegisterApiTest {
+    val registerApi = RegisterApi()
 
     @Test
-    fun search() {
+    fun registerByCellphone() {
         FuelManager.instance.basePath = "https://music.163.com"
         runBlocking {
-            searchApi.search("海阔天空").responseString { _, _, result ->
+            registerApi.registerByCellphone("JackuXL", "18000000000", "password", 2333).responseString { _, _, result ->
                 when (result) {
                     is Result.Failure -> {
                         throw result.getException()
@@ -27,10 +27,10 @@ internal class SearchApiTest {
     }
 
     @Test
-    fun searchVoice() {
+    fun checkNickName() {
         FuelManager.instance.basePath = "https://music.163.com"
         runBlocking {
-            searchApi.search("海阔天空", 2000).responseString { _, _, result ->
+            registerApi.checkNickName("JackuXL").responseString { _, _, result ->
                 when (result) {
                     is Result.Failure -> {
                         throw result.getException()
@@ -45,10 +45,30 @@ internal class SearchApiTest {
     }
 
     @Test
-    fun cloudsearch() {
+    fun replaceCellPhone() {
         FuelManager.instance.basePath = "https://music.163.com"
         runBlocking {
-            searchApi.cloudsearch("海阔天空").responseString { _, _, result ->
+            registerApi.replaceCellPhone("JackuXL", 2333, 2333).responseString { _, _, result ->
+                when (result) {
+                    is Result.Failure -> {
+                        throw result.getException()
+                    }
+
+                    is Result.Success -> {
+                        println(result.get())
+                    }
+                }
+            }.join()
+        }
+    }
+
+    @Test
+    fun initNickName() {
+        FuelManager.instance.basePath = "https://music.163.com"
+        runBlocking {
+            registerApi.initNickName("JackuXL").responseString { request, response, result ->
+                println(request)
+                println(response)
                 when (result) {
                     is Result.Failure -> {
                         throw result.getException()
