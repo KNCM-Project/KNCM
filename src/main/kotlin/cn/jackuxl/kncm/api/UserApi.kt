@@ -6,11 +6,11 @@ import com.github.kittinunf.fuel.core.Request
 
 class UserApi {
     fun getDetail(id: Long): Request {
-        val params = mapOf<String, String>()
+        val params = mutableListOf<Pair<String, String>>()
         return getRequest(
             url = "/weapi/v1/user/detail/${id}",
             data = params,
-            mode = ApiMode.WE_API
+            apiMode = ApiMode.WE_API
         )
     }
 }

@@ -12,7 +12,7 @@ class SearchApi {
         offset: Int = 0 // 偏移数量，用于分页 , 如 : 如 :( 页数 -1)*30, 其中 30 为 limit 的值
     ): Request {
         if (type == 2000) {
-            val params = mapOf(
+            val params = mutableListOf(
                 "keyword" to keyword,
                 "scene" to "normal",
                 "limit" to limit.toString(),
@@ -21,10 +21,10 @@ class SearchApi {
             return getRequest(
                 url = "/weapi/search/voice/get",
                 data = params,
-                mode = ApiMode.WE_API
+                apiMode = ApiMode.WE_API
             )
         }
-        val params = mapOf(
+        val params = mutableListOf(
             "s" to keyword,
             "type" to type.toString(),
             "limit" to limit.toString(),
@@ -33,7 +33,7 @@ class SearchApi {
         return getRequest(
             url = "/weapi/search/get",
             data = params,
-            mode = ApiMode.WE_API
+            apiMode = ApiMode.WE_API
         )
 
     }
@@ -44,7 +44,7 @@ class SearchApi {
         limit: Int = 30, // 返回数量
         offset: Int = 0 // 偏移数量，用于分页 , 如 : 如 :( 页数 -1)*30, 其中 30 为 limit 的值
     ): Request {
-        val params = mapOf(
+        val params = mutableListOf(
             "s" to keyword,
             "type" to type.toString(),
             "limit" to limit.toString(),
@@ -54,7 +54,7 @@ class SearchApi {
         return getRequest(
             url = "/weapi/cloudsearch/pc",
             data = params,
-            mode = ApiMode.WE_API
+            apiMode = ApiMode.WE_API
         )
     }
 }

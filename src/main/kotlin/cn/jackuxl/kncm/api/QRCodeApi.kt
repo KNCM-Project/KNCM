@@ -6,14 +6,14 @@ import com.github.kittinunf.fuel.core.Request
 
 class QRCodeApi {
     fun getKey(): Request {
-        val params = mapOf(
+        val params = mutableListOf(
             "type" to "1"
         )
 
         return getRequest(
             url = "/weapi/login/qrcode/unikey",
             data = params,
-            mode = ApiMode.WE_API
+            apiMode = ApiMode.WE_API
         )
     }
 
@@ -22,14 +22,14 @@ class QRCodeApi {
     }
 
     fun checkStatus(key:String): Request {
-        val params = mapOf(
+        val params = mutableListOf(
             "key" to key,
             "type" to "1"
         )
         return getRequest(
             url = "/weapi/login/qrcode/client/login",
             data = params,
-            mode = ApiMode.WE_API
+            apiMode = ApiMode.WE_API
         )
     }
 }

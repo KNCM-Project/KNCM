@@ -51,6 +51,7 @@ object Crypto {
         return cipher.doFinal(value.toByteArray())
     }
 
+    @Deprecated("Please use EApi(Recommended)/WeApi.")
     fun linuxApi(param: String): List<Pair<String, String>> {
         return listOf(
             "eparams" to String(HexUtil.encodeHex(aesEncrypt(param, linuxApiKey.toByteArray()))).uppercase()

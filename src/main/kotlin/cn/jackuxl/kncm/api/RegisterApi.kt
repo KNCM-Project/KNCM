@@ -14,7 +14,7 @@ class RegisterApi {
         md5: Boolean = false, // 密码是否经过MD5加密
         countrycode: Int = 86, // 国家码，用于国外手机号登录，例如美国传入：1
     ): Request {
-        val params = mapOf(
+        val params = mutableListOf(
             "phone" to phone,
             "countrycode" to countrycode.toString(),
             "nickname" to nickname,
@@ -24,16 +24,16 @@ class RegisterApi {
         return getRequest(
             url = "/weapi/register/cellphone",
             data = params,
-            mode = ApiMode.WE_API
+            apiMode = ApiMode.WE_API
         )
     }
 
     fun checkNickName(nickname: String): Request {
-        val params = mapOf("nickname" to nickname)
+        val params = mutableListOf("nickname" to nickname)
         return getRequest(
             url = "/weapi/nickname/duplicated",
             data = params,
-            mode = ApiMode.WE_API
+            apiMode = ApiMode.WE_API
         )
     }
 
@@ -43,7 +43,7 @@ class RegisterApi {
         captcha: Int, // 新手机验证码
         countrycode: Int = 86 // 国家码，用于国外手机号登录，例如美国传入：1
     ): Request {
-        val params = mapOf(
+        val params = mutableListOf(
             "captcha" to captcha.toString(),
             "oldcaptcha" to oldcaptcha.toString(),
             "phone" to phone,
@@ -52,28 +52,28 @@ class RegisterApi {
         return getRequest(
             url = "/weapi/user/replaceCellphone",
             data = params,
-            mode = ApiMode.WE_API
+            apiMode = ApiMode.WE_API
         )
     }
 
     fun initNickName(nickname: String): Request {
-        val params = mapOf("nickname" to nickname)
+        val params = mutableListOf("nickname" to nickname)
         return getRequest(
             url = "/eapi/activate/initProfile",
             data = params,
-            mode = ApiMode.E_API
+            apiMode = ApiMode.E_API
         )
     }
 
     fun checkPhoneExistence(phone: String, countrycode: Int = 86): Request {
-        val params = mapOf(
+        val params = mutableListOf(
             "cellphone" to phone,
             "countrycode" to countrycode.toString(),
         )
         return getRequest(
             url = "/eapi/cellphone/existence/check",
             data = params,
-            mode = ApiMode.E_API
+            apiMode = ApiMode.E_API
         )
     }
 }

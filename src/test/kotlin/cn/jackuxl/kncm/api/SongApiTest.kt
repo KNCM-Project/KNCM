@@ -58,4 +58,21 @@ internal class SongApiTest {
             }.join()
         }
     }
+
+    @Test
+    fun check() {
+        runBlocking {
+            songApi.check(id).responseString { _, _, result ->
+                when (result) {
+                    is Result.Failure -> {
+                        throw result.getException()
+                    }
+
+                    is Result.Success -> {
+                        println(result.get())
+                    }
+                }
+            }.join()
+        }
+    }
 }
