@@ -5,11 +5,11 @@ import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Test
 
 internal class QRCodeApiTest {
-    val qrCodeApi:QRCodeApi = QRCodeApi()
+
     @Test
     fun getKey() {
                 runBlocking {
-                    qrCodeApi.getKey().responseString { _, _, result ->
+                    QRCodeApi.getKey().responseString { _, _, result ->
                         when (result) {
                             is Result.Failure -> {
                                 throw result.getException()
@@ -19,19 +19,19 @@ internal class QRCodeApiTest {
                                 println(result.get())
                             }
                         }
-            }.join()
+                    }.join()
         }
     }
 
     @Test
     fun createQRCode() {
-        println(qrCodeApi.createQRCode("c011d352-d445-4e04-8fb3-f7cd8f7f3b01"))
+        println(QRCodeApi.createQRCode("c011d352-d445-4e04-8fb3-f7cd8f7f3b01"))
     }
 
     @Test
     fun checkStatus() {
         runBlocking {
-            qrCodeApi.checkStatus("c011d352-d445-4e04-8fb3-f7cd8f7f3b01").responseString { _, _, result ->
+            QRCodeApi.checkStatus("c011d352-d445-4e04-8fb3-f7cd8f7f3b01").responseString { _, _, result ->
                 when (result) {
                     is Result.Failure -> {
                         throw result.getException()

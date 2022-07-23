@@ -4,8 +4,8 @@ import cn.jackuxl.kncm.entity.ApiMode
 import cn.jackuxl.kncm.getRequest
 import com.github.kittinunf.fuel.core.Request
 
-class CaptchaApi(val phone:String,val ctcode:Int=86) {
-    fun send(): Request {
+object CaptchaApi {
+    fun send(phone: String, ctcode: Int = 86): Request {
         val params = mutableListOf(
             "cellphone" to phone,
             "ctcode" to ctcode.toString(),
@@ -18,7 +18,7 @@ class CaptchaApi(val phone:String,val ctcode:Int=86) {
         )
     }
 
-    fun verify(captcha:String): Request {
+    fun verify(phone: String, captcha: String, ctcode: Int = 86): Request {
         val params = mutableListOf(
             "cellphone" to phone,
             "ctcode" to ctcode.toString(),

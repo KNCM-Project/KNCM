@@ -6,8 +6,8 @@ import com.github.kittinunf.fuel.core.Request
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-class SongApi {
-    fun getComments(id:Long, offset: Int): Request {
+object SongApi {
+    fun getComments(id: Long, offset: Int): Request {
         val params = mutableListOf(
             "username" to "",
             "password" to "",

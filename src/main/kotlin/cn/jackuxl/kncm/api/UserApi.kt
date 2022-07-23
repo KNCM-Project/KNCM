@@ -4,7 +4,7 @@ import cn.jackuxl.kncm.entity.ApiMode
 import cn.jackuxl.kncm.getRequest
 import com.github.kittinunf.fuel.core.Request
 
-class UserApi {
+object UserApi {
     fun getDetail(id: Long): Request {
         val params = mutableListOf<Pair<String, String>>()
         return getRequest(

@@ -5,12 +5,11 @@ import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Test
 
 internal class SongApiTest {
-    private val songApi = SongApi()
     private val id = 1960903012L
     @Test
     fun getComments() {
                 runBlocking {
-                    songApi.getComments(id, 2).responseString { _, _, result ->
+                    SongApi.getComments(id, 2).responseString { _, _, result ->
                         when (result) {
                             is Result.Failure -> {
                                 throw result.getException()
@@ -20,7 +19,7 @@ internal class SongApiTest {
                                 println(result.get())
                             }
                         }
-            }.join()
+                    }.join()
         }
     }
 
@@ -28,7 +27,7 @@ internal class SongApiTest {
     @Test
     fun getDetail() {
         runBlocking {
-            songApi.getDetail(id).responseString { _, _, result ->
+            SongApi.getDetail(id).responseString { _, _, result ->
                 when (result) {
                     is Result.Failure -> {
                         throw result.getException()
@@ -45,7 +44,7 @@ internal class SongApiTest {
     @Test
     fun getUrl() {
         runBlocking {
-            songApi.getUrl(id).responseString { _, _, result ->
+            SongApi.getUrl(id).responseString { _, _, result ->
                 when (result) {
                     is Result.Failure -> {
                         throw result.getException()
@@ -62,7 +61,7 @@ internal class SongApiTest {
     @Test
     fun check() {
         runBlocking {
-            songApi.check(id).responseString { _, _, result ->
+            SongApi.check(id).responseString { _, _, result ->
                 when (result) {
                     is Result.Failure -> {
                         throw result.getException()

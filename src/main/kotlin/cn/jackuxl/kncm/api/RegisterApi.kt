@@ -4,8 +4,7 @@ import cn.hutool.crypto.SecureUtil
 import cn.jackuxl.kncm.entity.ApiMode
 import cn.jackuxl.kncm.getRequest
 import com.github.kittinunf.fuel.core.Request
-
-class RegisterApi {
+object RegisterApi {
     fun registerByCellphone(
         nickname: String, // 用户名
         phone: String, // 手机号

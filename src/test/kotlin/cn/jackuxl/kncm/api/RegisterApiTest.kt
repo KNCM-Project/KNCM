@@ -5,12 +5,11 @@ import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Test
 
 internal class RegisterApiTest {
-    val registerApi = RegisterApi()
 
     @Test
     fun registerByCellphone() {
                 runBlocking {
-                    registerApi.registerByCellphone("JackuXL", "18000000000", "password", 2333)
+                    RegisterApi.registerByCellphone("JackuXL", "18000000000", "password", 2333)
                         .responseString { _, _, result ->
                             when (result) {
                                 is Result.Failure -> {
@@ -28,7 +27,7 @@ internal class RegisterApiTest {
     @Test
     fun checkNickName() {
         runBlocking {
-            registerApi.checkNickName("JackuXL").responseString { _, _, result ->
+            RegisterApi.checkNickName("JackuXL").responseString { _, _, result ->
                 when (result) {
                     is Result.Failure -> {
                         throw result.getException()
@@ -45,7 +44,7 @@ internal class RegisterApiTest {
     @Test
     fun replaceCellPhone() {
         runBlocking {
-            registerApi.replaceCellPhone("JackuXL", 2333, 2333).responseString { _, _, result ->
+            RegisterApi.replaceCellPhone("JackuXL", 2333, 2333).responseString { _, _, result ->
                 when (result) {
                     is Result.Failure -> {
                         throw result.getException()
@@ -62,7 +61,7 @@ internal class RegisterApiTest {
     @Test
     fun initNickName() {
         runBlocking {
-            registerApi.initNickName("JackuXL").responseString { request, response, result ->
+            RegisterApi.initNickName("JackuXL").responseString { request, response, result ->
                 when (result) {
                     is Result.Failure -> {
                         throw result.getException()
@@ -79,7 +78,7 @@ internal class RegisterApiTest {
     @Test
     fun checkPhoneExistence() {
         runBlocking {
-            registerApi.checkPhoneExistence("18000000000").responseString { request, response, result ->
+            RegisterApi.checkPhoneExistence("18000000000").responseString { request, response, result ->
                 when (result) {
                     is Result.Failure -> {
                         throw result.getException()

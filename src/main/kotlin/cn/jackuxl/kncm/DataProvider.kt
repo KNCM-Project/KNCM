@@ -96,7 +96,11 @@ fun getRequest(
         when (apiMode) {
             WE_API -> {
                 data.add("csrf_token" to if (cookie.containsKey("_csrf")) cookie["_csrf"]!! else "")
-                Crypto.weApi(Json.encodeToString(data))
+                val dataMap = mutableMapOf<String, String>()
+                data.map {
+                    dataMap[it.first] = it.second
+                }
+                Crypto.weApi(Json.encodeToString(dataMap))
             }
 
             E_API -> {
@@ -113,7 +117,7 @@ fun getRequest(
                     "mobilename" to if (cookie.containsKey("mobilename")) cookie["mobilename"] else "", //设备model
                     "buildver" to LocalDateTime.now().toString().substring(0, 10),
                     "resolution" to "1920x1080", //设备分辨率
-                    "__csrf" to if (cookie.containsKey("__csrf")) DataProvider.cookie["_csrf"] else "",
+                    "__csrf" to if (cookie.containsKey("__csrf")) cookie["_csrf"] else "",
                     "os" to "android",
                     "channel" to if (cookie.containsKey("channel")) cookie["channel"] else "",
                     "requestId" to "${LocalDateTime.now()}_${floor(Math.random() * 1000).toString().padStart(4, '0')}",

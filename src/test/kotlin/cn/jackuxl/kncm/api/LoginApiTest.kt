@@ -5,12 +5,10 @@ import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Test
 
 internal class LoginApiTest {
-    private val userApi = LoginApi()
-
     @Test
     fun loginByCellphone() {
                 runBlocking {
-                    userApi.loginByCellphone("18000000000", "password").responseString { _, _, result ->
+                    LoginApi.loginByCellphone("18000000000", "password").responseString { _, _, result ->
                         when (result) {
                             is Result.Failure -> {
                                 throw result.getException()
@@ -20,14 +18,14 @@ internal class LoginApiTest {
                                 println(result.get())
                             }
                         }
-            }.join()
+                    }.join()
         }
     }
 
     @Test
     fun loginByCaptcha() {
         runBlocking {
-            userApi.loginByCellphone("18000000000", 2333).responseString { _, _, result ->
+            LoginApi.loginByCellphone("18000000000", 2333).responseString { _, _, result ->
                 when (result) {
                     is Result.Failure -> {
                         throw result.getException()
@@ -44,7 +42,7 @@ internal class LoginApiTest {
     @Test
     fun loginByEmail() {
         runBlocking {
-            userApi.loginByEmail("admin@163.com", "password").responseString { _, _, result ->
+            LoginApi.loginByEmail("admin@163.com", "password").responseString { _, _, result ->
                 when (result) {
                     is Result.Failure -> {
                         throw result.getException()
@@ -61,7 +59,7 @@ internal class LoginApiTest {
     @Test
     fun refresh() {
         runBlocking {
-            userApi.refresh().responseString { _, _, result ->
+            LoginApi.refresh().responseString { _, _, result ->
                 when (result) {
                     is Result.Failure -> {
                         throw result.getException()
@@ -79,7 +77,7 @@ internal class LoginApiTest {
     fun logout() {
 
         runBlocking {
-            userApi.logout().responseString { _, _, result ->
+            LoginApi.logout().responseString { _, _, result ->
                 when (result) {
                     is Result.Failure -> {
                         throw result.getException()
@@ -96,7 +94,7 @@ internal class LoginApiTest {
     @Test
     fun getStatus() {
         runBlocking {
-            userApi.getStatus().responseString { _, _, result ->
+            LoginApi.getStatus().responseString { _, _, result ->
                 when (result) {
                     is Result.Failure -> {
                         throw result.getException()
@@ -113,7 +111,7 @@ internal class LoginApiTest {
     @Test
     fun getAccount() {
         runBlocking {
-            userApi.getAccount().responseString { _, _, result ->
+            LoginApi.getAccount().responseString { _, _, result ->
                 when (result) {
                     is Result.Failure -> {
                         throw result.getException()

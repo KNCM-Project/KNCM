@@ -5,7 +5,7 @@ import cn.jackuxl.kncm.entity.ApiMode
 import cn.jackuxl.kncm.getRequest
 import com.github.kittinunf.fuel.core.Request
 
-class LoginApi {
+object LoginApi {
     fun loginByCellphone(
         phone: String, // 手机号
         password: String, // 密码
