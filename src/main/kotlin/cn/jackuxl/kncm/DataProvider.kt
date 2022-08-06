@@ -1,12 +1,15 @@
 package cn.jackuxl.kncm
 
-import cn.hutool.core.net.URLEncodeUtil
 import cn.jackuxl.kncm.entity.ApiMode
 import cn.jackuxl.kncm.entity.ApiMode.E_API
 import cn.jackuxl.kncm.entity.ApiMode.LINUX_API
 import cn.jackuxl.kncm.entity.ApiMode.WE_API
 import cn.jackuxl.kncm.entity.UserAgentMode
 import cn.jackuxl.kncm.entity.UserAgentMode.UserAgentModeEntity
+import cn.jackuxl.kncm.util.CookieList
+import cn.jackuxl.kncm.util.CookieUtil.containsCookie
+import cn.jackuxl.kncm.util.CookieUtil.getCookie
+import cn.jackuxl.kncm.util.CookieUtil.toCookieString
 import cn.jackuxl.kncm.util.Crypto
 import com.alibaba.fastjson.JSON
 import com.alibaba.fastjson2.JSONObject
@@ -15,15 +18,25 @@ import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.core.Request
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import java.net.HttpCookie
 import java.time.LocalDateTime
 import kotlin.math.floor
 
 object DataProvider {
-    var cookie: Map<String, String> = mapOf()
+    var cookie: CookieList = listOf()
+
+    //       private set
     var realIP: String? = null
+//    fun setCookie(newCookie:List<Map<String, String>>){
+//        cookie = newCookie
+//    }
+//    fun setCookie(newCookie:String){
+//        cookie = newCookie.cookieToMap()
+//    }
 }
 
 fun randomUserAgent(mode: UserAgentModeEntity): String? {
+
     val mobileUserAgentList = listOf(
         // iOS 13.5.1 14.0 beta with Safari
         "Mozilla/5.0 (iPhone; CPU iPhone OS 13_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1.1 Mobile/15E148 Safari/604.1",
@@ -67,35 +80,29 @@ fun getRequest(
     userAgentMode: UserAgentModeEntity = UserAgentMode.PC
 ): Request {
     FuelManager.instance.basePath = baseUrl
-
     val header = mutableMapOf(
         "User-Agent" to randomUserAgent(userAgentMode)!!,
         "Content-Type" to "application/x-www-form-urlencoded", //If Post
         "Referer" to referer,
-
-        )
-    if (!DataProvider.realIP.isNullOrBlank()) {
-        header["X-Real-IP"] = DataProvider.realIP!!
-        header["X-Forwarded-For"] = DataProvider.realIP!!
+    )
+    DataProvider.realIP?.let {
+        header["X-Real-IP"] = it
+        header["X-Forwarded-For"] = it
     }
-
-    //var cookie =
     if (DataProvider.cookie.isNotEmpty()) {
-        if (DataProvider.cookie.containsKey("MUSIC_U")) {
-            if (DataProvider.cookie.containsKey("MUSIC_A")) {
+        if (DataProvider.cookie.containsCookie("MUSIC_U")) {
+            if (DataProvider.cookie.containsCookie("MUSIC_A")) {
                 // TODO: 游客
             }
         }
-        header["Cookie"] =
-            DataProvider.cookie.map { "${URLEncodeUtil.encode(it.key)}=${URLEncodeUtil.encode(it.value)}" }
-                .joinToString(";")
+        header["Cookie"] = DataProvider.cookie.toCookieString()
     }
 
 
     val param = with(DataProvider) {
         when (apiMode) {
             WE_API -> {
-                data.add("csrf_token" to if (cookie.containsKey("_csrf")) cookie["_csrf"]!! else "")
+                data.add("csrf_token" to (cookie.getCookie("__csrf") ?: ""))
                 val dataMap = mutableMapOf<String, String>()
                 data.map {
                     dataMap[it.first] = it.second
@@ -109,24 +116,29 @@ fun getRequest(
                     dataMap[it.first] = it.second
                 }
                 val jsonObject = JSONObject.parseObject(JSON.toJSONString(dataMap))
-                val subHeader = mapOf(
-                    "osver" to if (cookie.containsKey("osver")) cookie["osver"] else "",
-                    "deviceId" to if (cookie.containsKey("deviceId")) cookie["deviceId"] else "",
-                    "appver" to if (cookie.containsKey("appver")) cookie["appver"] else "8.7.01",
-                    "versioncode" to if (cookie.containsKey("versioncode")) cookie["versioncode"] else "140", //版本号
-                    "mobilename" to if (cookie.containsKey("mobilename")) cookie["mobilename"] else "", //设备model
-                    "buildver" to LocalDateTime.now().toString().substring(0, 10),
-                    "resolution" to "1920x1080", //设备分辨率
-                    "__csrf" to if (cookie.containsKey("__csrf")) cookie["_csrf"] else "",
-                    "os" to "android",
-                    "channel" to if (cookie.containsKey("channel")) cookie["channel"] else "",
-                    "requestId" to "${LocalDateTime.now()}_${floor(Math.random() * 1000).toString().padStart(4, '0')}",
+                val subHeader = listOf(
+                    HttpCookie("osver", cookie.getCookie("osver") ?: ""),
+                    HttpCookie("deviceId", cookie.getCookie("deviceId") ?: ""),
+                    HttpCookie("appver", cookie.getCookie("appver") ?: "8.7.01"),
+                    HttpCookie("versioncode", cookie.getCookie("versioncode") ?: "140"), //版本号
+                    HttpCookie("mobilename", cookie.getCookie("mobilename") ?: ""), //设备model
+                    HttpCookie("buildver", LocalDateTime.now().toString().substring(0, 10)),
+                    HttpCookie("resolution", "1920x1080"), //设备分辨率
+                    HttpCookie("__csrf", cookie.getCookie("_csrf") ?: ""),
+                    HttpCookie("os", "android"),
+                    HttpCookie("channel", cookie.getCookie("channel") ?: ""),
+                    HttpCookie(
+                        "requestId",
+                        "${LocalDateTime.now()}_${floor(Math.random() * 1000).toString().padStart(4, '0')}"
+                    ),
                 )
-
-                if (cookie.containsKey("MUSIC_U")) header["MUSIC_U"] = cookie["MUSIC_U"]!!
-                if (cookie.containsKey("MUSIC_A")) header["MUSIC_A"] = cookie["MUSIC_A"]!!
-                header["Cookie"] = subHeader.map { "${URLEncodeUtil.encode(it.key)}=${URLEncodeUtil.encode(it.value)}" }
-                    .joinToString(";")
+                cookie.getCookie("MUSIC_U")?.let {
+                    header["MUSIC_U"] = it
+                }
+                cookie.getCookie("MUSIC_A")?.let {
+                    header["MUSIC_A"] = it
+                }
+                header["Cookie"] = subHeader.toCookieString()
                 jsonObject["header"] = subHeader
                 Crypto.eApi(url.replace("/eapi", "/api"), jsonObject.toJSONString())
             }
@@ -135,6 +147,7 @@ fun getRequest(
             else -> throw RuntimeException("Illegal Api Mode")
         }
     }
+    println(header["Cookie"])
     return Fuel.post(url, param).header(header)
 }
 

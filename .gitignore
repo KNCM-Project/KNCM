@@ -3,3 +3,8 @@
 /build/
 /build/classes/kotlin/main/
 /build/classes/kotlin/test/
+
+# Personal Info
+# (Similar to LoginApiTest)
+/src/test/kotlin/cn/jackuxl/kncm/api/PersonalLoginApiTest.kt
+/src/test/kotlin/cn/jackuxl/kncm/api/PersonalCaptchaApiTest.kt
