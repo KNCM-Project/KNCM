@@ -6,10 +6,10 @@ import cn.jackuxl.kncm.entity.ApiMode.LINUX_API
 import cn.jackuxl.kncm.entity.ApiMode.WE_API
 import cn.jackuxl.kncm.entity.UserAgentMode
 import cn.jackuxl.kncm.entity.UserAgentMode.UserAgentModeEntity
-import cn.jackuxl.kncm.util.CookieList
-import cn.jackuxl.kncm.util.CookieUtil.containsCookie
-import cn.jackuxl.kncm.util.CookieUtil.getCookie
-import cn.jackuxl.kncm.util.CookieUtil.toCookieString
+import cn.jackuxl.kncm.extension.CookieExtension.containsCookie
+import cn.jackuxl.kncm.extension.CookieExtension.getCookie
+import cn.jackuxl.kncm.extension.CookieExtension.toCookieString
+import cn.jackuxl.kncm.extension.CookieList
 import cn.jackuxl.kncm.util.Crypto
 import com.alibaba.fastjson.JSON
 import com.alibaba.fastjson2.JSONObject

@@ -1,4 +1,4 @@
-package cn.jackuxl.kncm.util
+package cn.jackuxl.kncm.extension
 
 import cn.hutool.core.net.URLEncodeUtil
 import java.net.HttpCookie
@@ -6,7 +6,7 @@ import java.net.HttpCookie
 typealias CookieList = List<HttpCookie>
 typealias MutableCookieList = MutableList<HttpCookie>
 
-object CookieUtil {
+object CookieExtension {
     fun String.toCookieList(): CookieList {
         val list: MutableCookieList = mutableListOf()
         val value = replace(" ", "")
